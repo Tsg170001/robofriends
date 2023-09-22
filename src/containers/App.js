@@ -4,7 +4,7 @@ import Cardlist from '../components/CardList';
 import 'tachyons';
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
-import ErrorBoundary from '../components/ErrorBoundary';
+import ErrorBoundry from '../components/ErrorBoundry';
 
 class App extends Component {
     constructor(){
@@ -26,22 +26,22 @@ class App extends Component {
     }
     render() {
         const { robots, searchfield } = this.state;
-        const filteredRobots = robots.filter(robot => {
-            return robot.name.toLowerCase().includes(searchfield.toLowerCase());
+        const filteredRobots = robots.filter(robots => {
+            return robots.name.toLowerCase().includes(searchfield.toLowerCase());
         })
 
-        if(!robots.length){
+        if(robots.length === 0){
             return <h1 className='tc'> Loading</h1>
         } else {
             return(
             <div className='tc'>
                 <h1 className='f1'>RoboFriends</h1>
                 <SearchBox searchChange={this.onSearchChange} />
-                <Scroll>
-                    <ErrorBoundary>
-                        <Cardlist robots={filteredRobots}/>
-                    </ErrorBoundary>
-                </Scroll>
+                    <Scroll>
+                        <ErrorBoundry>
+                            <Cardlist robots={filteredRobots}/>
+                        </ErrorBoundry>
+                    </Scroll>
             </div>
         );}
     }
